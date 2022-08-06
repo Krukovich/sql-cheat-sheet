@@ -1,13 +1,11 @@
-SELECT  
-&nbsp;&nbsp; COUNT  
-&nbsp;&nbsp; DISTINCT  
-&nbsp;&nbsp;&nbsp;&nbsp; FROM  
-&nbsp;&nbsp;&nbsp;&nbsp; WHERE  
-&nbsp;&nbsp; GROUP BY  
-&nbsp;&nbsp; HAVING  
-&nbsp;&nbsp;&nbsp;&nbsp; ORDER BY  
-&nbsp;&nbsp;&nbsp;&nbsp; ASC | DESC  
-&nbsp;&nbsp; LIMIT  
+#### [SELECT](#select)
+- #### [COUNT](#count)
+- #### [DISTINCT](#distinct)
+- #### [GROUP BY](#groupby)
+- #### [HAVING](#having)
+- #### [ORDER BY](#orderby)
+- #### [ASC | DESC](#asc)
+- #### [LIMIT](#limit)
 
 - Select all values from the table.
 
@@ -48,21 +46,30 @@ SELECT * FROM staff WHERE first_name = 'John' AND last_name = 'Doe';
 SELECT * FROM staff WHERE experience > 1 AND experience <= 3;
 ```
 
-- Get the number of fields 
+<h4 id="count">
+  - Get the number of fields 
+</h4>
+
 ```SQL
 SELECT COUNT (сolumn-name) FROM table-name WHERE condition;
 ---
 SELECT COUNT (name) FROM products WHERE discount > 10;
 ```
 
-- Get the number of **unique** fields 
+<h4 id="distinct">
+  - Get the number of **unique** fields 
+</h4>
+
 ```SQL
 SELECT COUNT (DISTINCT сolumn-name) FROM table-name WHERE condition;
 ---
 SELECT COUNT (DISTINCT manufacturer) FROM products;
 ```
 
-- Set a limit on the number of requested fields
+<h4 id="limit">
+  - Set a limit on the number of requested fields
+</h4>
+
 ```SQL
 SELECT * FROM table-name LIMIT 100;
 ---
@@ -76,14 +83,20 @@ SELECT * FROM table-name OFFSET 100;
 SELECT * FROM staff WHERE first_name = 'John' LIMIT 100;
 ```
 
-- Sort the received data in ascending (ASC - default) / descending (DESC) order 
+<h4 id="asc">
+  - Sort the received data in ascending (ASC - default) / descending (DESC) order
+</h4>
+
 ```SQL
 SELECT * FROM table-name ORDER BY column-name ASC / DESC;
 ---
 SELECT * FROM staff ORDER BY first_name DESC;
 ```
 
-- Set interval for selection of values
+<h4 id="orderby">
+  - Set interval for selection of values
+</h4>
+
 ```SQL
 SELECT * FROM table-name WHERE column-name BETWEEN from-value AND to-value;
 ---
@@ -113,14 +126,36 @@ The `I` prefix in the `LIKE` parameter allows you to ignore the case of letters 
 ```SQL
 SELECT * FROM staff WHERE first_name ILIKE 'Jo%';
 ```
+
+<h4 id="groupby">
+  - The GROUP BY clause determines how rows will be grouped.
+</h4>
+
+```SQL
+SELECT Manufacturer, COUNT(*) AS ModelsCount
+FROM Products
+GROUP BY Manufacturer
+```
+
+<h4 id="having">
+  - The following SQL statement lists the number of customers in each country. Only include countries with more than 5 customers:
+</h4>
+
+```SQL
+SELECT COUNT(CustomerID), Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerID) > 5;
+```
+
 search patterns:
 
-String variable | Action
---- | --- 
-% | any length string 
-_ | any single symbol
-[] | symbol range
-^ | excluding symbol range
+| String variable | Action                 |
+|-----------------|------------------------|
+| %               | any length string      |
+| _               | any single symbol      |
+| []              | symbol range           |
+| ^               | excluding symbol range |
 
 
 
